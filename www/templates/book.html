@@ -1,0 +1,29 @@
+<ion-view class="background-1" view-title="{{(data_type == 'send'?'หนังสือส่ง':'หนังสือรับ')}}">
+  <ion-content>
+    <div class="list list-transparent">
+      <div class="item" ng-if="data_type == 'send'">
+        <h2 ng-bind-html="book.edoc_code_full"></h2>
+        <p ng-bind-html="'ชั้นความเร็ว: ' + book.speed_label"></p>
+        <p ng-bind-html="'วันที่: ' + (book.edoc_date|dateThai)"></p>
+        <p ng-bind-html="'จาก: ' + (book.edoc_dear?book.edoc_dear:'-')"></p>
+        <p ng-bind-html="'ถึง: ' + (book.edoc_refer?book.edoc_refer:'-')"></p>
+        <p ng-bind-html="'เรื่อง: ' + book.edoc_title"></p>
+      </div>
+      <div class="item" ng-if="data_type == 'recieve'">
+        <h2 ng-bind-html="'เลขทะเบียนรับ: ' + book.rec_id"></h2>
+        <p ng-bind-html="'ที่: ' + book.edoc_code_full"></p>
+        <p ng-bind-html="'ชั้นความเร็ว: ' + book.speed_label"></p>
+        <p ng-bind-html="'วันที่: ' + (book.edoc_date|dateThai)"></p>
+        <p ng-bind-html="'จาก: ' + (book.edoc_dear?book.edoc_dear:'-')"></p>
+        <p ng-bind-html="'ถึง: ' + (book.edoc_refer?book.edoc_refer:'-')"></p>
+        <p ng-bind-html="'เรื่อง: ' + book.edoc_title"></p>
+      </div>
+      <div class="item" ng-if="book.edoc_detail">
+        <p ng-bind-html="book.edoc_detail"></p>
+      </div>
+      <div class="item" ng-if="book.files[0]">
+        <img class="img-file" ng-src="{{item.url}}" ng-repeat="item in book.files track by $index" ng-click="PhotoViewer(item.url)">
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

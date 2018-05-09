@@ -1,0 +1,38 @@
+<ion-modal-view class="background-1">
+  <ion-content>
+    <div class="list list-inset list-transparent mg-t-50 mg-b-15">
+      <ion-toggle toggle-class="toggle-balanced" ng-model="settingToggle.edoc_code_full.checked" ng-checked="settingToggle.edoc_code_full.checked">{{settingToggle.edoc_code_full.name}}</ion-toggle>
+      <ion-toggle toggle-class="toggle-balanced" ng-model="settingToggle.rec_id.checked" ng-checked="settingToggle.rec_id.checked">{{settingToggle.rec_id.name}}</ion-toggle>
+
+      <ion-toggle toggle-class="toggle-balanced" ng-model="settingToggle.edoc_date.checked" ng-checked="settingToggle.edoc_date.checked">{{settingToggle.edoc_date.name}}</ion-toggle>
+      <label class="item item-input" ng-if="settingToggle.edoc_date.checked">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="วันที่เริ่มต้น" ng-model="data.start_date_title" readonly="" ng-click="DatePickerStart()">
+      </label>
+      <label class="item item-input" ng-if="settingToggle.edoc_date.checked">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="วันที่สิ้นสุด" ng-model="data.end_date_title" readonly="" ng-click="DatePickerEnd()">
+      </label>
+      <ion-toggle toggle-class="toggle-balanced" ng-model="settingToggle.edoc_title.checked" ng-checked="settingToggle.edoc_title.checked">{{settingToggle.edoc_title.name}}</ion-toggle>
+      <ion-toggle toggle-class="toggle-balanced" ng-model="settingToggle.edoc_speed.checked" ng-checked="settingToggle.edoc_speed.checked">{{settingToggle.edoc_speed.name}}</ion-toggle>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="button button-block button-positive mg-t-0" ng-click="Search()">แสดง</button>
+      </div>
+    </div>
+    <!--<div class="list list-inset mg-t-0 mg-b-0">
+      <label class="item item-input" ng-if="settingToggle.edoc_date.checked">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="วันที่เริ่มต้น" ng-model="data.start_date_title" readonly="" ng-click="DatePickerStart()">
+      </label>
+      <label class="item item-input" ng-if="settingToggle.edoc_date.checked">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="วันที่สิ้นสุด" ng-model="data.end_date_title" readonly="" ng-click="DatePickerEnd()">
+      </label>
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="CloseSetting()">ปิด</button>
+    </div>-->
+  </ion-content>
+</ion-modal-view>

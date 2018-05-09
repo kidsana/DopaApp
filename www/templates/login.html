@@ -1,0 +1,21 @@
+<ion-modal-view class="background-1">
+  <ion-content scroll="false">
+    <div class="login-form">
+      <img class="img-logo" src="img/logo.png">
+      <div class="list list-inset">
+        <label class="item item-input">
+          <span class="input-label">รหัสบัตรประชาชน</span>
+          <input class="input-above" type="tel" ng-model="data.idcard" valid-number>
+          <input class="input-below" type="tel" placeholder="X-XXXX-XXXXX-XX-X" ng-model="data.idcard_title" readonly="">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">รหัสผ่าน</span>
+          <input type="password" placeholder="ต้องการ" ng-model="data.password">
+        </label>
+      </div>
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="Login()">เข้าสู่ระบบ</button>
+    </div>
+  </ion-content>
+</ion-modal-view>

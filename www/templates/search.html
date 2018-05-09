@@ -1,0 +1,43 @@
+<ion-view class="background-1" view-title="ค้นหาหนังสือ">
+  <ion-content>
+    <div class="row book-type-form">
+      <div class="col">
+        <div class="col-type" ng-class="{'active': data_type == 'send'}" ng-click="Type('send')">หนังสือส่ง</div>
+        <div class="col-type" ng-class="{'active': data_type == 'recieve'}" ng-click="Type('recieve')">หนังสือรับ</div>
+      </div>
+    </div>
+    <div class="row search-form">
+      <div class="col col-75 col-search">
+        <div class="list mg-t-0 mg-b-0">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="ค้นหา" ng-model="data.search">
+          </label>
+        </div>
+      </div>
+      <div class="col col-search">
+        <button class="button button-positive icon ion-gear-a" ng-click="OpenSetting()"></button>
+      </div>
+    </div>
+    <div class="list list-transparent" ng-if="!message && data_type == 'send'">
+      <a class="item" ng-repeat="item in listBooks track by $index" href="#/app/book/send/{{item.edoc_id}}">
+        <h2 ng-bind-html="item.edoc_code_full"></h2>
+        <p ng-bind-html="'ชั้นความเร็ว: ' + item.speed_label"></p>
+        <p ng-bind-html="'วันที่: ' + (item.edoc_date|dateThai)"></p>
+        <p ng-bind-html="'เรื่อง: ' + item.edoc_title"></p>
+      </a>
+    </div>
+    <div class="list list-transparent" ng-if="!message && data_type == 'recieve'">
+      <a class="item" ng-repeat="item in listBooks track by $index" href="#/app/book/recieve/{{item.rec_id}}">
+        <h2 ng-bind-html="'เลขทะเบียนรับ: ' + item.rec_id"></h2>
+        <p ng-bind-html="'ที่: ' + item.edoc_code_full"></p>
+        <p ng-bind-html="'ชั้นความเร็ว: ' + item.speed_label"></p>
+        <p ng-bind-html="'วันที่: ' + (item.edoc_date|dateThai)"></p>
+        <p ng-bind-html="'เรื่อง: ' + item.edoc_title"></p>
+      </a>
+    </div>
+    <div class="list list-transparent" ng-if="message">
+      <div class="item text-center" ng-bind-html="message"></div>
+    </div>
+  </ion-content>
+</ion-view>

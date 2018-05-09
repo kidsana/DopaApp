@@ -1,0 +1,14 @@
+<ion-view class="background-1" view-title="หน้าหลัก">
+  <ion-content>
+    <div class="login-form" ng-if="!isLogin">
+      <img class="img-logo" src="img/logo.png">
+    </div>
+    <div class="padding" ng-if="!isLogin">
+      <button class="button button-block button-positive" ng-click="LoginShow()">เข้าสู่ระบบ</button>
+    </div>
+    <div class="list list-transparent" ng-if="isLogin">
+      <div class="item item-divider">เมนู</div>
+      <div class="item" ng-click="Go('app.search')">ค้นหาหนังสือ</div>
+    </div>
+  </ion-content>
+</ion-view>

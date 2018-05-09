@@ -1,0 +1,35 @@
+<ion-view class="background-1" view-title="{{(data_type == 'send'?'หนังสือส่ง':'หนังสือรับ')}}">
+  <ion-content>
+    <div class="list list-transparent" ng-if="data_type == 'send'">	  
+      <a class="item" ng-repeat="item in listBooks track by $index" href="#/app/book/send/{{item.edoc_id}}">
+		<div class="row">
+			<div class="col col-10"><h2 ng-bind-html="$index+1"></h2></div>
+			<div class="col">		
+				<h2 ng-bind-html="item.edoc_code_full"></h2>
+				<p ng-bind-html="'ชั้นความเร็ว: ' + item.speed_label"></p>
+				<!--<p ng-bind-html="'วันที่: ' + (item.edoc_date|dateThai)"></p>-->
+				<p ng-bind-html="'วันที่: ' + item.edoc_date"></p>
+				<p ng-bind-html="'เรื่อง: ' + item.edoc_title"></p>
+			</div>
+		</div>
+      </a>
+    </div>
+    <div class="list list-transparent" ng-if="data_type == 'recieve'">
+      <a class="item" ng-repeat="item in listBooks track by $index" href="#/app/book/recieve/{{item.rec_id}}">
+		<div class="row">
+			<div class="col col-10"><h2 ng-bind-html="$index+1"></h2></div>
+			<div class="col">
+				<h2 ng-bind-html="'เลขทะเบียนรับ: ' + item.rec_id"></h2>
+				<p ng-bind-html="'ที่: ' + item.edoc_code_full"></p>
+				<p ng-bind-html="'ชั้นความเร็ว: ' + item.speed_label"></p>
+				<p ng-bind-html="'วันที่: ' + (item.edoc_date|dateThai)"></p>
+				<p ng-bind-html="'เรื่อง: ' + item.edoc_title"></p>
+			</div>
+		</div>	
+      </a>
+    </div>
+    <div class="list list-transparent" ng-if="message">
+      <div class="item text-center" ng-bind-html="message"></div>
+    </div>
+  </ion-content>
+</ion-view>

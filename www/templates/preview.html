@@ -1,0 +1,9 @@
+<ion-modal-view class="background-1 image-previews">
+  <div class="modal image-modal transparent" ng-click="ClosePreivew()">
+    <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="true" active-slide="activeSlide">
+      <ion-slide ng-repeat="item in previews track by $index">
+        <img ng-src="{{item.url}}" class="fullscreen">
+      </ion-slide>
+    </ion-slide-box>
+  </div>
+</ion-modal-view>
