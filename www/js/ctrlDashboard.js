@@ -7,7 +7,7 @@ App.controller('DashboardCtrl', function($rootScope, $scope, $ionicModal, $state
     var type = '';
   }
 
-  var GetBook = function(type, id) {
+  var GetDashboard = function(type, id) {
     $scope.book = {};
     $scope.preivews = [];
     $scope.data_type = type;
@@ -27,7 +27,7 @@ App.controller('DashboardCtrl', function($rootScope, $scope, $ionicModal, $state
     });
   }
 
-  GetBook(type, id);
+  GetDashboard(type, id);
 
   $ionicModal.fromTemplateUrl('templates/preview.html', {scope: $scope}).then(function(modal) {
     $scope.modal = modal;

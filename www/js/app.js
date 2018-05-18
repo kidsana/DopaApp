@@ -33,6 +33,7 @@ App.run(function($ionicPlatform, $rootScope, $ionicSideMenuDelegate, $state, $io
         // $ionicViewService.clearHistory();
         $ionicHistory.nextViewOptions({disableBack: true});
         $state.go('app.home');
+        //$state.go('app.footer');
         $rootScope.isLogin = false;
       }
     });
@@ -53,7 +54,8 @@ App.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'templates/menu.html',
+    //templateUrl: 'templates/menu.html',
+    templateUrl: 'templates/footer.html',
     controller: 'AppCtrl'
   }).state('app.home', {
     url: '/home',
@@ -63,12 +65,28 @@ App.config(function($stateProvider, $urlRouterProvider) {
         controller: 'HomeCtrl'
       }
     }
+  }).state('app.footer', {
+    url: '/footer',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/footer.html',
+        controller: 'FooterCtrl'
+      }
+    }
   }).state('app.search', {
     url: '/search',
     views: {
       'menuContent': {
         templateUrl: 'templates/search.html',
         controller: 'SearchCtrl'
+      }
+    }
+  }).state('app.search2', {
+    url: '/search2',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/search2.html',
+        controller: 'Search2Ctrl'
       }
     }
   }).state('app.book', {
@@ -95,8 +113,9 @@ App.config(function($stateProvider, $urlRouterProvider) {
         controller: 'BookmainCtrl'
       }
     }
-  });
+  })
   $urlRouterProvider.otherwise('/app/home');
+  //$urlRouterProvider.otherwise('/app/footer');
 });
 
 App.config(function($ionicConfigProvider) {
