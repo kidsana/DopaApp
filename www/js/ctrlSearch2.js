@@ -73,14 +73,16 @@ App.controller('Search2Ctrl', function($rootScope, $scope, $ionicModal, $state, 
     }
 	console.log(data_post);
     var data = $filter('ObjectToParams')(data_post);
-    //Ajax.get(REST.search, data, true).then(function(res) {
     Ajax.get(REST.search, data, true).then(function(res) {
+    //Ajax.post('http://edoc.dopa.go.th/services/getSearch', data, true).then(function(res) {
+	  //console.log(res);
       $scope.isSearch = true;
       if (res.data.result == 1 && res.data.data) {
         $scope.listBooks = res.data.data;
       } else {
         $scope.message = res.data.message;
       }
+	  
     }, function(err) {
       console.log(err);
     });

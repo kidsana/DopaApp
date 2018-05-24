@@ -36,8 +36,11 @@
         <p ng-bind-html="'เรื่อง: ' + item.edoc_title"></p>
       </a>
     </div>
-    <div class="list list-transparent" ng-if="message">
+    <!--<div class="list list-transparent" ng-if="message">
       <div class="item text-center" ng-bind-html="message"></div>
+    </div>-->
+	<div class="padding">
+      <button class="button button-block button-positive" ng-click="Login()">ค้นหา</button>
     </div>
   </ion-content>
 </ion-view>

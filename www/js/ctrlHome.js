@@ -22,15 +22,19 @@ App.controller('HomeCtrl', function($rootScope, $scope, $ionicModal, $timeout, $
   });
 
   $scope.Login = function() {
-    if ($scope.data.idcard != '' && $scope.data.password != '') {
+    //if ($scope.data.idcard != '' && $scope.data.password != '') {
+    if ($scope.data.idcard != '') {
       var data_post = {
         'auth': 'dopa',
-        'idcard': $scope.data.idcard,
-        'password': $scope.data.password
+        'idcard': $scope.data.idcard
+       // 'password': $scope.data.password
       }
       var data = $filter('ObjectToParams')(data_post);
-      Ajax.get(REST.login, data, true).then(function(res) {
-        if (res.data.result == 1 && res.data.data) {
+      //Ajax.get(REST.login, data, true).then(function(res) {
+      Ajax.get('http://edoc.dopa.go.th/services/authen_edoc', data, true).then(function(res) {
+		//console.log(res.data.status)  
+        //if (res.data.result == true && res.data.data) {
+        if (res.data.status == true) {
           $rootScope.isLogin = true;
           $scope.modal.hide();
           //$scope.Go('app.search');

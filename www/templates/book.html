@@ -4,7 +4,8 @@
       <div class="item" ng-if="data_type == 'send'">
         <h2 ng-bind-html="book.edoc_code_full"></h2>
         <p ng-bind-html="'ชั้นความเร็ว: ' + book.speed_label"></p>
-        <p ng-bind-html="'วันที่: ' + (book.edoc_date|dateThai)"></p>
+        <!--<p ng-bind-html="'วันที่: ' + (book.edoc_date|dateThai)"></p>-->
+        <p ng-bind-html="'วันที่: ' + (book.edoc_date)"></p>
         <p ng-bind-html="'จาก: ' + (book.edoc_dear?book.edoc_dear:'-')"></p>
         <p ng-bind-html="'ถึง: ' + (book.edoc_refer?book.edoc_refer:'-')"></p>
         <p ng-bind-html="'เรื่อง: ' + book.edoc_title"></p>
@@ -13,7 +14,8 @@
         <h2 ng-bind-html="'เลขทะเบียนรับ: ' + book.rec_id"></h2>
         <p ng-bind-html="'ที่: ' + book.edoc_code_full"></p>
         <p ng-bind-html="'ชั้นความเร็ว: ' + book.speed_label"></p>
-        <p ng-bind-html="'วันที่: ' + (book.edoc_date|dateThai)"></p>
+        <!--<p ng-bind-html="'วันที่: ' + (book.edoc_date|dateThai)"></p>-->
+        <p ng-bind-html="'วันที่: ' + (book.edoc_date)"></p>
         <p ng-bind-html="'จาก: ' + (book.edoc_dear?book.edoc_dear:'-')"></p>
         <p ng-bind-html="'ถึง: ' + (book.edoc_refer?book.edoc_refer:'-')"></p>
         <p ng-bind-html="'เรื่อง: ' + book.edoc_title"></p>

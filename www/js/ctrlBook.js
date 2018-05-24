@@ -17,12 +17,30 @@ App.controller('BookCtrl', function($rootScope, $scope, $ionicModal, $stateParam
       id: id
     }
     var data = $filter('ObjectToParams')(data_post);
-    Ajax.get(REST.book, data, true).then(function(res) {
-      if (res.data.result == 1 && res.data.data) {
+	if(type=='send'){
+		var url = 'http://edoc.dopa.go.th/services/getEdocSend';	
+	}else{
+		var url = 'http://edoc.dopa.go.th/services/getEdocReceive';
+	}
+	//console.log(url);
+	//console.log(data);
+	Ajax.get(url, data, true).then(function(res) {		
+    //Ajax.get(REST.book, data, true).then(function(res) {
+	  //console.log(id);	
+	  console.log(res.data);
+	  angular.forEach(res.data, function(value, key) {
+		if(value.edoc_id == id || value.rec_id == id) {
+			$scope.book = value;
+			//console.log(value);	
+		}         
+	  });
+	  //console.log(res.data);	
+      /*if (res.data.result == 1 && res.data.data) {
 		console.log(res.data);
         $scope.book = res.data.data;
         $scope.previews = res.data.data.files;
       }
+	  */
     }, function(err) {
       console.log(err);
     });
