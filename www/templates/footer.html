@@ -1,16 +1,16 @@
 <ion-side-menus enable-menu-with-back-views="false">
 	<ion-side-menu-content>
 		<ion-nav-bar class="bar-stable">
-		  <ion-nav-back-button></ion-nav-back-button>
+			<ion-nav-back-button></ion-nav-back-button>
 		</ion-nav-bar>
 		<ion-nav-view name="menuContent"></ion-nav-view>
-    </ion-side-menu-content>
+	</ion-side-menu-content>
 	<ion-tabs class="tabs-icon-top">
-		<ion-tab icon="ion-home" title="Home" href="#/app/dashboard"></ion-tab>
+		<ion-tab icon="ion-home" title="หน้าหลัก" href="#/app/dashboard"></ion-tab>
 		<!--<ion-tab badge="2" badge-style="badge-assertive" icon="ion-document" title="ส่ง"></ion-tab>-->
 		<ion-tab icon="ion-paper-airplane" title="ส่ง" href="#/app/bookmain/send"></ion-tab>
 		<ion-tab icon="ion-document" title="รับ" href="#/app/bookmain/recieve"></ion-tab>
 		<ion-tab icon="ion-search" title="ค้นหา" href="#/app/search2"></ion-tab>
-		<ion-tab icon="ion-log-out" title="ออกจากระบบ"></ion-tab>
+		<ion-tab icon="ion-log-out" title="ออกจากระบบ" ng-click="Logout()"></ion-tab>
 	</ion-tabs>
 </ion-side-menus>

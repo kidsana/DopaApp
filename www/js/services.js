@@ -1,16 +1,16 @@
 App.factory('LoadingAjax', [
   '$ionicLoading',
   '$rootScope',
-  function($ionicLoading, $rootScope) {
+  function ($ionicLoading, $rootScope) {
     return {
-      show: function() {
+      show: function () {
         loading = {
           Backdrop: true
         };
         $rootScope.ionicLoading = 'show';
         return $ionicLoading.show(loading);
       },
-      hide: function() {
+      hide: function () {
         $rootScope.ionicLoading = 'hide';
         return $ionicLoading.hide();
       }
@@ -18,8 +18,8 @@ App.factory('LoadingAjax', [
   }
 ]);
 
-App.filter('ObjectToParams', function() {
-  return function(obj) {
+App.filter('ObjectToParams', function () {
+  return function (obj) {
     var p = [];
     for (var key in obj) {
       p.push(key + '=' + encodeURIComponent(obj[key]));
@@ -32,9 +32,9 @@ App.factory('Ajax', [
   '$q',
   '$http',
   '$rootScope',
-  function($q, $http, $rootScope) {
+  function ($q, $http, $rootScope) {
     return {
-      get: function(url, data, loading) {
+      post: function (url, data, loading) {
         if (loading) {
           $rootScope.callAjax++;
         }
@@ -59,12 +59,36 @@ App.factory('Ajax', [
         });
         return deferred.promise;
       },
-      json: function(url, loading) {
+      get: function (url, data, loading) {
         if (loading) {
           $rootScope.callAjax++;
         }
         var deferred = $q.defer();
-        $http({method: "get", url: url}).then(function successCallback(response) {
+        $http({
+          method: "get",
+          url: url,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).then(function successCallback(response) {
+          if (loading) {
+            $rootScope.callAjax--;
+          }
+          deferred.resolve(response);
+        }, function errorCallback(response) {
+          if (loading) {
+            $rootScope.callAjax--;
+          }
+          deferred.reject(response);
+        });
+        return deferred.promise;
+      },
+      json: function (url, loading) {
+        if (loading) {
+          $rootScope.callAjax++;
+        }
+        var deferred = $q.defer();
+        $http({ method: "get", url: url }).then(function successCallback(response) {
           if (loading) {
             $rootScope.callAjax--;
           }
@@ -83,8 +107,8 @@ App.factory('Ajax', [
 
 App.filter('dateThai', [
   '$filter',
-  function($filter) {
-    return function(input) {
+  function ($filter) {
+    return function (input) {
       if (input) {
         input = $filter('date')(input, 'yyyy-MM-dd hh:mm:ss');
         var day = '';
@@ -122,10 +146,51 @@ App.filter('dateThai', [
   }
 ]);
 
+App.filter('dateThai2', [
+  '$filter',
+  function ($filter) {
+    return function (input) {
+      if (input) {
+        input = $filter('date')(input, 'dd-M-yy');
+        var day = '';
+        var month = '';
+        var year = '';
+        var hour = '';
+        var minus = '';
+        if (typeof input !== 'undefined' && input != '') {
+          var arr = input.split(/[- :]/);
+          day = arr[0];
+          months = {
+            'JAN': 'มกราคม',
+            'FEB': 'กุมภาพันธ์',
+            'MAR': 'มีนาคม',
+            'APR': 'เมษายน',
+            'MAY': 'พฤษภาคม',
+            'JUN': 'มิถุนายน',
+            'JUL': 'กรกฎาคม',
+            'AUG': 'สิงหาคม',
+            'SEP': 'กันยายน',
+            'OCT': 'ตุลาคม',
+            'NOV': 'พฤศจิกายน',
+            'DEC': 'ธันวาคม'
+          }
+          month = months[arr[1]];
+          year = parseInt(arr[2]) + 43 + 2500;
+          hour = arr[3];
+          minus = arr[4];
+        }
+        return day + ' ' + month + ' ' + year;
+      } else {
+        return '';
+      }
+    }
+  }
+]);
+
 App.filter('dateThaiMin', [
   '$filter',
-  function($filter) {
-    return function(input) {
+  function ($filter) {
+    return function (input) {
       if (input) {
         input = $filter('date')(input, 'yyyy-MM-dd');
         var day = '';
@@ -161,8 +226,8 @@ App.filter('dateThaiMin', [
 
 App.filter('idcardFormat', [
   '$filter',
-  function($filter) {
-    return function(input) {
+  function ($filter) {
+    return function (input) {
       if (input) {
         if (input.length > 12) {
           return input.slice(0, 1) + '-' + input.slice(1, 5) + '-' + input.slice(5, 10) + '-' + input.slice(10, 12) + '-' + input.slice(12);
@@ -182,14 +247,14 @@ App.filter('idcardFormat', [
   }
 ]);
 
-App.directive('validNumber', function() {
+App.directive('validNumber', function () {
   return {
     require: 'ngModel',
-    link: function(scope, element, attrs, ngModelCtrl) {
+    link: function (scope, element, attrs, ngModelCtrl) {
       if (!ngModelCtrl) {
         return;
       }
-      ngModelCtrl.$parsers.push(function(val) {
+      ngModelCtrl.$parsers.push(function (val) {
         if (angular.isUndefined(val)) {
           var val = '';
         }
@@ -200,7 +265,7 @@ App.directive('validNumber', function() {
         }
         return clean;
       });
-      element.bind('keypress', function(event) {
+      element.bind('keypress', function (event) {
         if (event.keyCode === 32) {
           event.preventDefault();
         }

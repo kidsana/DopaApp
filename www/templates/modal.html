@@ -1,0 +1,30 @@
+<style>
+    .input-label {
+        max-width: 1%;
+    }
+
+    .item-select select {
+        max-width: 99%;
+        direction: ltr;
+    }
+</style>
+<ion-modal-view class="background-1">
+    <ion-content class="padding">
+        <div class="list">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    &nbsp;
+                </div>
+                <select ng-model="orgSelect.org_id">
+                    <option value="{{item.org_id}}" ng-repeat="item in orgData">{{item.org_name}}</option>
+                </select>
+            </label>
+            <button class="button button-full button-positive" ng-click="selectOrg(orgSelect)">เลือกหน่วยงาน</button>
+        </div>
+    </ion-content>
+</ion-modal-view>

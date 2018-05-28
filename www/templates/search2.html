@@ -1,46 +1,73 @@
+<style>
+  .btn-loadmore {
+    margin-bottom: 30px;
+  }
+</style>
 <ion-view class="background-1" view-title="ค้นหาหนังสือ">
   <ion-content>
     <div class="row">
       <div class="col col-search">
         <div class="">
           <label class="item item-input">
-            <input type="text" placeholder="วันที่" ng-model="data.edoc_date">
+            <input type="text" placeholder="วันที่" ng-model="data.start_date" ng-click="DatePickerStart()">
           </label>
         </div>
-		<div class="">
+        <div class="">
+          <label class="item item-input">
+            <input type="text" placeholder="ถึง" ng-model="data.end_date" ng-click="DatePickerEnd()">
+          </label>
+        </div>
+        <div class="">
           <label class="item item-input">
             <input type="text" placeholder="เรื่อง" ng-model="data.edoc_title">
           </label>
         </div>
-		<div class="">
+        <div class="">
           <label class="item item-input">
             <input type="text" placeholder="เลขที่หนังสือ" ng-model="data.rec_id">
           </label>
         </div>
       </div>
     </div>
-    <div class="list list-transparent" ng-if="!message && data_type == 'send'">
-      <a class="item" ng-repeat="item in listBooks track by $index" href="#/app/book/send/{{item.edoc_id}}">
-        <h2 ng-bind-html="item.edoc_code_full"></h2>
-        <p ng-bind-html="'ชั้นความเร็ว: ' + item.speed_label"></p>
-        <p ng-bind-html="'วันที่: ' + (item.edoc_date|dateThai)"></p>
-        <p ng-bind-html="'เรื่อง: ' + item.edoc_title"></p>
-      </a>
+    <div class="padding" style="text-align: center">
+      <button class="button  button-positive" ng-click="Search(data)">ค้นหา</button>
+      <button class="button  button-assertive" ng-click="Clear()">ล้างค่า</button>
     </div>
-    <div class="list list-transparent" ng-if="!message && data_type == 'recieve'">
+    <div class="list list-transparent" ng-if="!message">
+      <div ng-repeat="item in listBooks track by $index">
+        <a class="item" href="#/app/book/send/{{item.edoc_id}}" ng-if="item.edoc_receive_number">
+          {{item.rec_id}} 67
+          <h2 ng-bind-html="item.edoc_code_full"></h2>
+          <p ng-bind-html="'ชั้นความเร็ว: ' + item.speed_label"></p>
+          <p ng-bind-html="'วันที่: ' + (item.edoc_date|dateThai2)"></p>
+          <p ng-bind-html="'เรื่อง: ' + item.edoc_title"></p>
+        </a>
+        <a class="item" href="#/app/book/recieve/{{item.rec_id}}" ng-if="!item.edoc_receive_number">
+          {{item.rec_id}} 55
+          <h2 ng-bind-html="'เลขทะเบียนรับ: ' + item.rec_id"></h2>
+          <p ng-bind-html="'ที่: ' + item.edoc_code_full"></p>
+          <p ng-bind-html="'ชั้นความเร็ว: ' + item.speed_label"></p>
+          <p ng-bind-html="'วันที่: ' + (item.edoc_date|dateThai2)"></p>
+          <p ng-bind-html="'เรื่อง: ' + item.edoc_title"></p>
+        </a>
+      </div>
+
+    </div>
+    <!-- <div class="list list-transparent" ng-if="!message && data_type == 'recieve'">
       <a class="item" ng-repeat="item in listBooks track by $index" href="#/app/book/recieve/{{item.rec_id}}">
         <h2 ng-bind-html="'เลขทะเบียนรับ: ' + item.rec_id"></h2>
         <p ng-bind-html="'ที่: ' + item.edoc_code_full"></p>
         <p ng-bind-html="'ชั้นความเร็ว: ' + item.speed_label"></p>
-        <p ng-bind-html="'วันที่: ' + (item.edoc_date|dateThai)"></p>
+        <p ng-bind-html="'วันที่: ' + (item.edoc_date|dateThai2)"></p>
         <p ng-bind-html="'เรื่อง: ' + item.edoc_title"></p>
       </a>
+    </div> -->
+    <div class="padding" style="text-align: center" ng-if="loadmoreBtn">
+      <button class="button  button-positive btn-loadmore" ng-click="Loadmore(data)">Load more..</button>
     </div>
     <!--<div class="list list-transparent" ng-if="message">
       <div class="item text-center" ng-bind-html="message"></div>
     </div>-->
-	<div class="padding">
-      <button class="button button-block button-positive" ng-click="Login()">ค้นหา</button>
-    </div>
+
   </ion-content>
 </ion-view>

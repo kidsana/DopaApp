@@ -1,6 +1,6 @@
-var watchSettingToggle = function() {};
-var watchSearch = function() {};
-var watchIdcard = function() {};
+var watchSettingToggle = function () { };
+var watchSearch = function () { };
+var watchIdcard = function () { };
 
 var App = angular.module('starter', ['ionic', 'ionic-datepicker']);
 //var HOST = 'http://jigsawinnovation.com/project/edoc_dopa/api/';
@@ -10,12 +10,12 @@ var HOST = 'http://localhost/dopaapi/index.php/api/';
 angular.module('starter.controllers', []);
 angular.module('starter.services', []);
 
-App.run(function($ionicPlatform, $rootScope, $ionicSideMenuDelegate, $state, $ionicHistory, LoadingAjax, $ionicPopup) {
+App.run(function ($ionicPlatform, $rootScope, $ionicSideMenuDelegate, $state, $ionicHistory, LoadingAjax, $ionicPopup) {
   $rootScope.isLogin = false;
   $rootScope.callAjax = 0;
   $rootScope.ionicLoading = 'hide';
 
-  $rootScope.$watch('callAjax', function(value) {
+  $rootScope.$watch('callAjax', function (value) {
     if (value == 0) {
       LoadingAjax.hide();
     } else {
@@ -25,13 +25,13 @@ App.run(function($ionicPlatform, $rootScope, $ionicSideMenuDelegate, $state, $io
     }
   });
 
-  $rootScope.Logout = function() {
-    var confirmPopup = $ionicPopup.confirm({title: 'คุณต้องการออกจากระบบหรือไม่', template: '', okText: 'ตกลง', cancelText: 'ยกเลิก'});
-    confirmPopup.then(function(res) {
+  $rootScope.Logout = function () {
+    var confirmPopup = $ionicPopup.confirm({ title: 'คุณต้องการออกจากระบบหรือไม่', template: '', okText: 'ตกลง', cancelText: 'ยกเลิก' });
+    confirmPopup.then(function (res) {
       if (res) {
         // $ionicSideMenuDelegate.toggleLeft();
         // $ionicViewService.clearHistory();
-        $ionicHistory.nextViewOptions({disableBack: true});
+        $ionicHistory.nextViewOptions({ disableBack: true });
         $state.go('app.home');
         //$state.go('app.footer');
         $rootScope.isLogin = false;
@@ -39,7 +39,7 @@ App.run(function($ionicPlatform, $rootScope, $ionicSideMenuDelegate, $state, $io
     });
   }
 
-  $ionicPlatform.ready(function() {
+  $ionicPlatform.ready(function () {
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
@@ -50,7 +50,7 @@ App.run(function($ionicPlatform, $rootScope, $ionicSideMenuDelegate, $state, $io
   });
 });
 
-App.config(function($stateProvider, $urlRouterProvider) {
+App.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider.state('app', {
     url: '/app',
     abstract: true,
@@ -106,7 +106,7 @@ App.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   }).state('app.bookmain', {
-	url: '/bookmain/:bookType',
+    url: '/bookmain/:bookType',
     views: {
       'menuContent': {
         templateUrl: 'templates/bookmain.html',
@@ -118,10 +118,11 @@ App.config(function($stateProvider, $urlRouterProvider) {
   //$urlRouterProvider.otherwise('/app/footer');
 });
 
-App.config(function($ionicConfigProvider) {
+App.config(function ($ionicConfigProvider) {
   $ionicConfigProvider.navBar.alignTitle('center');
   $ionicConfigProvider.backButton.previousTitleText(false);
   $ionicConfigProvider.backButton.text('').icon('ion-ios-arrow-back');
+  $ionicConfigProvider.tabs.position('bottom');
 });
 
 App.constant('REST', {
@@ -130,4 +131,4 @@ App.constant('REST', {
   'book': HOST + 'book'
 });
 
-App.controller('AppCtrl', function($scope, $ionicModal, $timeout) {});
+App.controller('AppCtrl', function ($scope, $ionicModal, $timeout) { });
