@@ -18,6 +18,8 @@ App.controller('DashboardCtrl', function ($rootScope, $scope, $ionicModal, $stat
       org_id: $rootScope.orgIdSelect
     }
     var data = $filter('ObjectToParams')(data_post);
+	console.log($rootScope);
+	console.log(data);
     Ajax.post('http://edoc.dopa.go.th/services/SumEdoc', data, true).then(function (res) {
       //console.log(res.data);
       $scope.send = res.data.send;

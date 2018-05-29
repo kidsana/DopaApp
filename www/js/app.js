@@ -29,12 +29,25 @@ App.run(function ($ionicPlatform, $rootScope, $ionicSideMenuDelegate, $state, $i
     var confirmPopup = $ionicPopup.confirm({ title: 'คุณต้องการออกจากระบบหรือไม่', template: '', okText: 'ตกลง', cancelText: 'ยกเลิก' });
     confirmPopup.then(function (res) {
       if (res) {
-        // $ionicSideMenuDelegate.toggleLeft();
-        // $ionicViewService.clearHistory();
+        $rootScope.isLogin = false;
+        window.sessionStorage.clear();
+        $ionicHistory.clearCache().then(function(){
+          $ionicHistory.clearHistory();
+          $ionicHistory.nextViewOptions({
+            disableBack: false,
+            historyRoot: false
+          });
+          $state.go('app.home');
+        });
+		/*
+		// $ionicSideMenuDelegate.toggleLeft();
+        //$ionicHistory.clearHistory();
         $ionicHistory.nextViewOptions({ disableBack: true });
+   
         $state.go('app.home');
         //$state.go('app.footer');
         $rootScope.isLogin = false;
+		*/
       }
     });
   }

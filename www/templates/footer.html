@@ -5,12 +5,12 @@
 		</ion-nav-bar>
 		<ion-nav-view name="menuContent"></ion-nav-view>
 	</ion-side-menu-content>
-	<ion-tabs class="tabs-icon-top">
-		<ion-tab icon="ion-home" title="หน้าหลัก" href="#/app/dashboard"></ion-tab>
+	<ion-tabs class="tabs-icon-top" ng-if="isLogin">
+		<ion-tab icon="ion-home" title="หน้าหลัก" href="#/app/dashboard" ng-if="isLogin"></ion-tab>
 		<!--<ion-tab badge="2" badge-style="badge-assertive" icon="ion-document" title="ส่ง"></ion-tab>-->
-		<ion-tab icon="ion-paper-airplane" title="ส่ง" href="#/app/bookmain/send"></ion-tab>
-		<ion-tab icon="ion-document" title="รับ" href="#/app/bookmain/recieve"></ion-tab>
-		<ion-tab icon="ion-search" title="ค้นหา" href="#/app/search2"></ion-tab>
-		<ion-tab icon="ion-log-out" title="ออกจากระบบ" ng-click="Logout()"></ion-tab>
+		<ion-tab icon="ion-paper-airplane" title="ส่ง" href="#/app/bookmain/send" ng-if="isLogin"></ion-tab>
+		<ion-tab icon="ion-document" title="รับ" href="#/app/bookmain/recieve" ng-if="isLogin"></ion-tab>
+		<ion-tab icon="ion-search" title="ค้นหา" href="#/app/search2" ng-if="isLogin"></ion-tab>
+		<ion-tab icon="ion-log-out" title="ออกจากระบบ"  ng-if="isLogin" ng-click="Logout()"></ion-tab>
 	</ion-tabs>
 </ion-side-menus>
