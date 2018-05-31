@@ -24,18 +24,43 @@ App.controller('BookCtrl', function ($rootScope, $scope, $ionicModal, $statePara
     } else {
       var url = 'http://edoc.dopa.go.th/services/getEdocReceive';
     }
+	
     //console.log(url);
     // console.log(data);
     Ajax.post(url, data, true).then(function (res) {
       //Ajax.get(REST.book, data, true).then(function(res) {
       //console.log(id);	
-      // console.log(res.data);
-      angular.forEach(res.data, function (value, key) {
+      //console.log(res.data);
+      var check_data = false;
+	  angular.forEach(res.data, function (value, key) {
         if (value.edoc_id == id || value.rec_id == id) {
           $scope.book = value;
-          // console.log('book', value);
+		  check_data = true;
+          //console.log('book', value);
         }
       });
+	  
+	  
+	   //console.log('A='+check_data);
+	    if(check_data == false){
+		 var data_post = {
+		  rec_id: id
+		}
+		var data_filter = $filter('ObjectToParams')(data_post);
+		Ajax.post('http://edoc.dopa.go.th/services/getSearch', data_filter, true).then(function (res) {
+		  if (res.statusText == "OK" && res.data) {
+			  angular.forEach(res.data, function (value, key) {
+				if (value.edoc_id == id || value.rec_id == id) {
+				  $scope.book = value;
+				}
+			  });
+		  } 
+
+		}, function (err) {
+		  console.log(err);
+		});
+	  }
+	  
       //console.log(res.data);	
       /*if (res.data.result == 1 && res.data.data) {
 		console.log(res.data);
