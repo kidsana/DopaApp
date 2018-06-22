@@ -11,63 +11,33 @@ App.controller('BookCtrl', function ($rootScope, $scope, $ionicModal, $statePara
     $scope.book = {};
     $scope.preivews = [];
     $scope.data_type = type;
+	
+	 if(type == 'send'){
+		type = 1; 
+	 }else{
+		 type = ''; 
+	 }
     // Post data
     var data_post = {
       type: type,
-      id: id,
+      edoc_id: id,
       org_id: $rootScope.orgIdSelect
     }
     // console.log('book', ' id ', id, ' type ', type);
     var data = $filter('ObjectToParams')(data_post);
-    if (type == 'send') {
-      var url = 'http://edoc.dopa.go.th/services/getEdocSend';
-    } else {
-      var url = 'http://edoc.dopa.go.th/services/getEdocReceive';
-    }
-	
-    //console.log(url);
-    // console.log(data);
+	var url = 'http://edoc.dopa.go.th/services/getDetail';
     Ajax.post(url, data, true).then(function (res) {
-      //Ajax.get(REST.book, data, true).then(function(res) {
-      //console.log(id);	
+ 
       //console.log(res.data);
       var check_data = false;
 	  angular.forEach(res.data, function (value, key) {
+		  console.log(value.edoc_id+'|'+value.rec_id);
         if (value.edoc_id == id || value.rec_id == id) {
           $scope.book = value;
 		  check_data = true;
-          //console.log('book', value);
         }
       });
-	  
-	  
-	   //console.log('A='+check_data);
-	    if(check_data == false){
-		 var data_post = {
-		  rec_id: id
-		}
-		var data_filter = $filter('ObjectToParams')(data_post);
-		Ajax.post('http://edoc.dopa.go.th/services/getSearch', data_filter, true).then(function (res) {
-		  if (res.statusText == "OK" && res.data) {
-			  angular.forEach(res.data, function (value, key) {
-				if (value.edoc_id == id || value.rec_id == id) {
-				  $scope.book = value;
-				}
-			  });
-		  } 
 
-		}, function (err) {
-		  console.log(err);
-		});
-	  }
-	  
-      //console.log(res.data);	
-      /*if (res.data.result == 1 && res.data.data) {
-		console.log(res.data);
-        $scope.book = res.data.data;
-        $scope.previews = res.data.data.files;
-      }
-	  */
     }, function (err) {
       console.log(err);
     });

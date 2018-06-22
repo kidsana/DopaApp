@@ -17,13 +17,13 @@
 			</a>
 		</div>
 		<div class="list list-transparent" ng-if="data_type == 'recieve'">
-			<a class="item" ng-repeat="item in listBooks track by $index" href="#/app/book/recieve/{{item.rec_id}}">
+			<a class="item" ng-repeat="item in listBooks track by $index" href="#/app/book/recieve/{{item.edoc_id}}">
 				<div class="row">
 					<div class="col col-10">
 						<h2 ng-bind-html="$index+1"></h2>
 					</div>
 					<div class="col">
-						<h2 ng-bind-html="'เลขทะเบียนรับ: ' + item.rec_id"></h2>
+						<h2 ng-bind-html="'เลขทะเบียนรับ: ' + item.edoc_id"></h2>
 						<p ng-bind-html="'ที่: ' + item.edoc_code_full"></p>
 						<p ng-bind-html="'ชั้นความเร็ว: ' + item.speed_label"></p>
 						<p ng-bind-html="'วันที่: ' + (item.edoc_date|dateThai2)"></p>

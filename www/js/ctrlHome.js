@@ -36,7 +36,7 @@ App.controller('HomeCtrl', function ($rootScope, $scope, $ionicModal, $timeout, 
       Ajax.post('http://edoc.dopa.go.th/services/authen_edoc', data, true).then(function (res) {
         //console.log(res.data)
         if (res.data.status == true && res.data) {
-
+			
           if (res.data.status == true) {
             $rootScope.isLogin = true;
             $rootScope.ProfileData = res.data;
@@ -44,7 +44,7 @@ App.controller('HomeCtrl', function ($rootScope, $scope, $ionicModal, $timeout, 
             $scope.modal.hide();
             // console.log('data', res.data)
             // console.log('count', res.data.org_id.length);
-            if (Array.isArray(res.data.org_id)) {
+			if (Array.isArray(res.data.org_id)) {				
               $scope.orgData = res.data.org_id;
               $rootScope.orgIdSelect = res.data.org_id;
               $scope.modal_org.show();
@@ -53,10 +53,15 @@ App.controller('HomeCtrl', function ($rootScope, $scope, $ionicModal, $timeout, 
               $rootScope.orgIdSelect = res.data.org_id;
               $scope.Go('app.dashboard');
             }
+			
           } else {
-            $scope.showAlert(res.data.message, '');
+            //$scope.showAlert(res.data.message, '');
+            $scope.showAlert('รหัสบัตรประชาชนไม่ถูกต้อง', '');
           }
-        }
+        }else{
+			$scope.showAlert('รหัสบัตรประชาชนไม่ถูกต้อง', '');
+		}
+		
       }, function (err) {
         console.log(err);
       });
@@ -99,7 +104,7 @@ App.controller('HomeCtrl', function ($rootScope, $scope, $ionicModal, $timeout, 
 
   $scope.selectOrg = function (data) {
     $rootScope.orgIdSelect = data.org_id;
-    $scope.modal_org.hide();
+	$scope.modal_org.hide();
     $scope.Go('app.dashboard');
   }
   watchIdcard = $scope.$watch('data.idcard', function (value) {
